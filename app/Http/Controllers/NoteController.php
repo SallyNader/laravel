@@ -39,6 +39,7 @@ class NoteController extends Controller
     {
 
      $page=Page::find(33)->notes();
+     //
      return view('notes.show',compact('page'));
 
     }
