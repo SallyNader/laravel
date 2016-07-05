@@ -48,7 +48,7 @@ class NoteController extends Controller
     public function showAll()
     {
 
-        $notes = Note::with('page')->get();
+        $notes = Note::all();
 
 
         return view('notes.showall', compact('notes'));

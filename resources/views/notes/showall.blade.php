@@ -1,5 +1,8 @@
+@extends('app')
+@section('content')
 @foreach($notes as $n)
 
-{{$n->body}} <h1>{{$n->page->title}}</h1>
+{{$n->body}} In Page :<strong>{{$n->page['title']}}</strong>
 <br />
 @endforeach
+@stop
