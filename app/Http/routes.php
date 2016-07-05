@@ -24,4 +24,7 @@ Route::get('note/form',function(){
 
 Route::post('note/add',"NoteController@add");
 
-Route::get('page/show','NoteController@show');
+Route::get('page/show/{id}','NoteController@show');
+
+
+Route::get('note/showall','NoteController@showAll');

@@ -9,7 +9,7 @@ class Note extends Model
     protected $fillable=['body','page_id'];
 
 
-public function pages(){
+public function page(){
 
 	return $this->belongsTo('App\Page','page_id');
 }
