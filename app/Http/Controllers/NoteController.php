@@ -8,11 +8,13 @@ use App\Http\Requests;
 use App\Note;
 use App\Page;
 use DB;
+use App\Http\Requests\createNote;
+use Illuminate\Support\Facades\Validator;
 class NoteController extends Controller
 {
 
 
-    public function add(Request $request)
+    public function add(createNote $request)
     {
         $note = $request->input('note');
         $no = $request->input('page');
@@ -28,9 +30,9 @@ class NoteController extends Controller
         $id_note = $note->id;
 
         //DB::table('page_note')->insert(['page_id' => $id_page, 'note_id' => $id_note]);
-
-
-        return "Done";
+        $v = Validator::make($request);
+        if ($v->passes())
+            return "Done";
     }
 
 

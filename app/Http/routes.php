@@ -11,20 +11,52 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', function ()
+{
+    return view('welcome'); }
+);
+Route::get('lang', function ()
+{
 
 
-Route::get('note/form',function(){
+    echo trans('home.welcome'); }
+
+);
+//uploads
+Route::put('upload/(:any)/update','UploadController@putUpdate');
+Route::get('upload/update/{id}/{comment}','UploadController@getUpdatePath');
+Route::post('upload/delete-force/{id}','UploadController@postForceDelete');
+Route::get('upload/restore/{id}','UploadController@postRestore');
+Route::controller('upload','UploadController');    //using restful controller
 
 
-	return view('notes.create-note');
-});
-
-Route::post('note/add',"NoteController@add");
-
-Route::get('page/show/{id}','NoteController@show');
 
 
-Route::get('note/showall','NoteController@showAll');
+
+//role
+
+Route::get('role/showrole', 'PosterController@showallroles');
+
+
+//comments
+
+Route::get('comment/showall', 'CommentController@showall');
+Route::get('poster/showall/{id}', 'PosterController@showposters');
+
+//users
+
+Route::controller('user','UserController');
+
+//notes
+Route::get('note/form', function ()
+{
+    $title = 'Create Note';
+		return view('notes.create-note', compact('title')); }
+);
+
+Route::post('note/add', "NoteController@add");
+
+Route::get('page/show/{id}', 'NoteController@show');
+
+
+Route::get('note/showall', 'NoteController@showAll');
