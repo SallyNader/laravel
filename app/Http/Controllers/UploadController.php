@@ -3,11 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Auth;
 use App\Http\Requests;
 use App\Upload;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\update;
+use Validator;
 class UploadController extends Controller
 {
+	public function __construct(){
+		return $this->middleware('auth');
+	}
 
     public function postUpload(Request $request)
     {
@@ -35,7 +42,8 @@ class UploadController extends Controller
     {
 
 
-        return view('uploads.photos');
+            return view('uploads.photos');
+
     }
 
 
@@ -96,26 +104,42 @@ class UploadController extends Controller
     }
 
 
-    public function putUpdate(Request $request)
+    public function putUpdate(update $request)
     {
 
 
         $comment = $request->input('comment');
+        $id = $request->input('id');
+        $upload = Upload::find($id);
 
-        foreach ($request->File('multi') as $file) {
+        $file = Input::file('one');
+        $filename = $file->getClientOriginalName();
+        $path = public_path() . '/upload/';
 
-            $path = public_path() . '/upload';
-            $filename = time() . rand(11111, 00000) . '.' . $file->
-                getClientOriginalExtension();
-            if ($file->move($path, $filename)) {
-                $files_name .= 'uploaded file' . $filename . "<br/>";
-                Upload::update(['comment' => $comment, 'path' => $filename]);
-            }
 
+        if ($file->move($path, $filename)) {
+
+
+            $upload->update($request->all());
+            $upload->save();
         }
+
+
         //Upload::update(['comment' => $request->input('comment')]);
 
-        return view('uploads/all-paths');
+        return redirect('upload/all-paths');
+
+    }
+
+
+    public function getTestU($id, $comment)
+    {
+
+        //$comment = Upload::find($id)->where('id', '=', $id)->pluck('comment');
+        $comment = Upload::find($id);
+        //or but in blade $comment->comment
+        return View('uploads.update', compact('comment'));
+
     }
 
 

@@ -53,7 +53,7 @@ class NoteController extends Controller
         $notes = Note::all();
 
 
-        return view('notes.showall', compact('notes'));
+        return view('notes.showall',['notes'=>$notes]);
 
     }
 

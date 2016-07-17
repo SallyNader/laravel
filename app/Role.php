@@ -10,6 +10,18 @@ class Role extends Model
     {
 
 
-        $this->belongsToMany('App\Poster','role_poster')->withPivot('poster_id','role_id');
+        return $this->belongsToMany('App\Poster', 'role_poster')->withPivot('poster_id',
+            'role_id');
     }
+
+
+    public function user()
+    {
+
+
+        return $this->belongsToMany('App\User');
+    }
+
+
+
 }

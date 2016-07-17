@@ -13,8 +13,8 @@
 
 {{$path->comment}}---TO---{{$path->path}}
  </tr>
-  <a href="{{url('upload/delete-path',['path_id'=>$path->id])}}"  class="btn btn-info">Delete</a>
-  <a href="{{url('upload/update',['path_id'=>$path->id,'comment'=>$path->comment])}}" class="btn btn-default" >Update</a>
+  <a href="{{url('upload/delete-path/'.$path->id)}}"  class="btn btn-info">Delete</a>
+  <a href="{{url('upload/test-u',['path_id'=>$path->id,'comment'=>$path->comment])}}" class="btn btn-default" >Update</a>
 	</pre>
 
 

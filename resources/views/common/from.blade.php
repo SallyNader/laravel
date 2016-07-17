@@ -1,2 +1,3 @@
 
-<strong style="color: blueviolet;">{{{UPLOADS}}</strong>
+
+<a  href="">{{$name}}</a>
